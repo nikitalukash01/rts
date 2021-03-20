@@ -3,6 +3,7 @@ import random
 import numpy as np
 import math
 import cmath
+import time
 n = 10
 N = 256
 W0 = 150
@@ -20,7 +21,7 @@ def generator(n, N, W):
 
     return signals
 
-
+## excecuting with numpy array
 def remakeFur(signal):
     size = len(signal)
 
@@ -30,30 +31,55 @@ def remakeFur(signal):
             F[p] += complex(math.cos(2*math.pi/N * (p*t)), -
                             math.sin(2*math.pi/N * (p*t))) * signal[t]
 
-    
     return F
+
 
 def toAbsolute(complexFur):
     l = []
     for el in complexFur:
-       l.append(abs(el))
-    
+        l.append(abs(el))
+
     return l
 
-signal = generator(n,N,W)
-spectr = toAbsolute(remakeFur(signal))
-print(spectr)
 
-##plotting signal
-plt.plot(signal)
-plt.xlabel('t')
-plt.ylabel('X(t)')
-plt.figure()
-
-##plotting spectr
-plt.plot(spectr)
-plt.xlabel('signal')
-plt.ylabel('spectr')
-plt.show()
+signal = generator(n, N, W)
+time_start = time.time()
+remakeFur(signal)
+duration = time.time() - time_start
+print("%s seconds" % duration)
 
 
+# excecuting using list
+def listFur(signal):
+    size = len(signal)
+    F = []
+    for p in range(size):
+        for t in range(size):
+            F.append(complex(math.cos(2*math.pi/N * (p*t)), -
+                         math.sin(2*math.pi/N * (p*t))) * signal[t])
+
+    return F
+
+
+signal_1 = generator(n, N, W)
+time_start_1 = time.time()
+listFur(signal_1)
+duration_1 = time.time() - time_start_1
+print("%s seconds" % duration_1)
+
+## printing difference in time
+print("%s difference in seconds" % (duration - duration_1))
+
+# print(spectr)
+
+# plotting signal
+# plt.plot(signal)
+# plt.xlabel('t')
+# plt.ylabel('X(t)')
+# plt.figure()
+
+# ##plotting spectr
+# plt.plot(spectr)
+# plt.xlabel('signal')
+# plt.ylabel('spectr')
+# plt.show()

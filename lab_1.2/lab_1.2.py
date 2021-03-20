@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt  # lib for graphs
 import random
 import numpy as np
 import math
+import time
 
 n = 10
 N = 256
@@ -53,34 +54,41 @@ def crosscorel(signal1,signal2):
 
     return result
 
-
-
-
+signal_third = generator(n,N,W)
+time_start = time.time()
+autocorel(signal_third)
+duration_1 = time.time() - time_start
+# print("%s seconds" %duration_1)
 signal_first = generator(n,N,W)
 signal_second = generator(n,N,W)
-print(crosscorel(signal_first,signal_second))
-print('Mx:', np.average(signal_first)) 
-print('Dx:', np.var(signal_second))  
+time_start_1 = time.time()
+crosscorel(signal_first,signal_second)
+duration_2 = time.time() -  time_start_1
+print("%s seconds" % (duration_1 - duration_2))
 
-plt.plot(signal_first)
-plt.plot(signal_second)
-plt.xlabel('time')
-plt.ylabel('x')
-plt.title('Random generated signals 1, 2')
-plt.figure()
+# print(crosscorel(signal_first,signal_second))
+# print('Mx:', np.average(signal_first)) 
+# print('Dx:', np.var(signal_second))  
+
+# plt.plot(signal_first)
+# plt.plot(signal_second)
+# plt.xlabel('time')
+# plt.ylabel('x')
+# plt.title('Random generated signals 1, 2')
+# plt.figure()
 
 
-#cross-correlation
-plt.plot(crosscorel(signal_first, signal_second)) 
-plt.xlabel('time')
-plt.ylabel('correlation')
-plt.title('cross-correlation')
-plt.figure()
+# #cross-correlation
+# plt.plot(crosscorel(signal_first, signal_second)) 
+# plt.xlabel('time')
+# plt.ylabel('correlation')
+# plt.title('cross-correlation')
+# plt.figure()
 
-# autocorrelation
-plt.plot(autocorel(signal_first))  
-plt.xlabel('time')
-plt.ylabel('correlation')
-plt.title('autocorrelation')
-plt.show()
+# # autocorrelation
+# plt.plot(autocorel(signal_first))  
+# plt.xlabel('time')
+# plt.ylabel('correlation')
+# plt.title('autocorrelation')
+# plt.show()
 
