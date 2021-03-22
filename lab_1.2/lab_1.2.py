@@ -31,7 +31,7 @@ def corelvalue(signal1, signal2):
 
     result = []
     for i in range(size):
-        result.append((signal1[i] - Mx1) * (signal2[i] + Mx2))
+        result.append((signal1[i] - Mx1) * (signal2[i] - Mx2))
 
     return sum(result)/(size - 1)
 
@@ -42,6 +42,7 @@ def autocorel(signal):
     result = []
     for i in range(size):
         result.append(corelvalue(signal[0:size], signal[i:size+i]))
+        print(signal[i:size+i])
 
     return result
    
@@ -54,41 +55,42 @@ def crosscorel(signal1,signal2):
 
     return result
 
-signal_third = generator(n,N,W)
-time_start = time.time()
-autocorel(signal_third)
-duration_1 = time.time() - time_start
-# print("%s seconds" %duration_1)
+# signal_third = generator(n,N,W)
+# time_start = time.time()
+# autocorel(signal_third)
+# duration_1 = time.time() - time_start
+# # print("%s seconds" %duration_1)
 signal_first = generator(n,N,W)
 signal_second = generator(n,N,W)
-time_start_1 = time.time()
-crosscorel(signal_first,signal_second)
-duration_2 = time.time() -  time_start_1
-print("%s seconds" % (duration_1 - duration_2))
+# time_start_1 = time.time()
+# crosscorel(signal_first,signal_second)
+# duration_2 = time.time() -  time_start_1
+# print("%s seconds" % (duration_1 - duration_2))
 
-# print(crosscorel(signal_first,signal_second))
-# print('Mx:', np.average(signal_first)) 
-# print('Dx:', np.var(signal_second))  
+# autocorel(signal_third)
+print(crosscorel(signal_first,signal_second))
+print('Mx:', np.average(signal_first)) 
+print('Dx:', np.var(signal_second))  
 
-# plt.plot(signal_first)
-# plt.plot(signal_second)
-# plt.xlabel('time')
-# plt.ylabel('x')
-# plt.title('Random generated signals 1, 2')
-# plt.figure()
+plt.plot(signal_first)
+plt.plot(signal_second)
+plt.xlabel('time')
+plt.ylabel('x')
+plt.title('Random generated signals 1, 2')
+plt.figure()
 
 
-# #cross-correlation
-# plt.plot(crosscorel(signal_first, signal_second)) 
-# plt.xlabel('time')
-# plt.ylabel('correlation')
-# plt.title('cross-correlation')
-# plt.figure()
+#cross-correlation
+plt.plot(crosscorel(signal_first, signal_second)) 
+plt.xlabel('time')
+plt.ylabel('correlation')
+plt.title('cross-correlation')
+plt.figure()
 
-# # autocorrelation
-# plt.plot(autocorel(signal_first))  
-# plt.xlabel('time')
-# plt.ylabel('correlation')
-# plt.title('autocorrelation')
-# plt.show()
+## autocorrelation
+plt.plot(autocorel(signal_first))  
+plt.xlabel('time')
+plt.ylabel('correlation')
+plt.title('autocorrelation')
+plt.show()
 

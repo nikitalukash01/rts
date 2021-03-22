@@ -60,12 +60,13 @@ def listFur(signal):
 
     return F
 
+print(remakeFur(generator(n,N,W)))
 
-signal_1 = generator(n, N, W)
-time_start_1 = time.time()
-listFur(signal_1)
-duration_1 = time.time() - time_start_1
-print("%s seconds" % duration_1)
+# signal_1 = generator(n, N, W)
+# time_start_1 = time.time()
+# listFur(signal_1)
+# duration_1 = time.time() - time_start_1
+# print("%s seconds" % duration_1)
 
 ## printing difference in time
 print("%s difference in seconds" % (duration - duration_1))
