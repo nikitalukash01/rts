@@ -13,6 +13,7 @@ W = np.arange(W0, Wmax + W0, W0)
 
 def generator(n, N, W):
     signals = np.zeros(N)
+    
     for w in W :
         A = random.random()
         phi = random.random()
@@ -35,20 +36,18 @@ print(DFT_slow(generator(n,N,W)))
 
 def FFT(signal):
     size = len(signal)
+    
     if size % 2 > 0:
-        raise ValueError("Value must be power of 2")
-        
+        raise ValueError("Value must be power of 2")    
     elif size <= 32:
        return DFT_slow(signal)
-
     else:
         X_even = FFT(signal[::2])
         X_odd = FFT(signal[1::2])    
         factor = np.exp(-2j * np.pi * np.arange(size) / size)
         res =  np.concatenate([X_even + factor[:int(size / 2)] * X_odd,
                                X_even + factor[int(size / 2):] * X_odd]) 
-        
-    return res
+        return res
 
 fft = FFT(generator(n,N,W))
 res = [abs(f) for f in fft]

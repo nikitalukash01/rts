@@ -10,6 +10,7 @@ W0 = 150
 Wmax = 1500
 W = np.arange(W0, Wmax + W0, W0)
 
+data = np.asarray([5,1,3,8])
 
 def generator(n, N, W):
     signals = np.zeros(N)
@@ -42,11 +43,11 @@ def toAbsolute(complexFur):
     return l
 
 
-signal = generator(n, N, W)
-time_start = time.time()
-remakeFur(signal)
-duration = time.time() - time_start
-print("%s seconds" % duration)
+# signal = generator(n, N, W)
+# time_start = time.time()
+# remakeFur(signal)
+# duration = time.time() - time_start
+# print("%s seconds" % duration)
 
 
 # excecuting using list
@@ -60,7 +61,7 @@ def listFur(signal):
 
     return F
 
-print(remakeFur(generator(n,N,W)))
+# print(remakeFur(generator(n,N,W)))
 
 # signal_1 = generator(n, N, W)
 # time_start_1 = time.time()
@@ -69,7 +70,7 @@ print(remakeFur(generator(n,N,W)))
 # print("%s seconds" % duration_1)
 
 ## printing difference in time
-print("%s difference in seconds" % (duration - duration_1))
+# print("%s difference in seconds" % (duration - duration_1))
 
 # print(spectr)
 
@@ -84,3 +85,5 @@ print("%s difference in seconds" % (duration - duration_1))
 # plt.xlabel('signal')
 # plt.ylabel('spectr')
 # plt.show()
+
+print(toAbsolute(remakeFur(data)))
