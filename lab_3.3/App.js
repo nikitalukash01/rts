@@ -8,7 +8,7 @@ export default function App() {
   const [c, setC] = useState(null);
   const [d, setD] = useState(null);
   const [y, setY] = useState(null);
-  const [result, setResult] = useState('[5,2,1,1]');
+  const [result, setResult] = useState('[]');
 
   return (
     <SafeAreaView>
