@@ -29,7 +29,7 @@ export default function App() {
       />
       </View>
       <Text style={styles.expression}> {res && `${res.x} *  ${res.y}`}</Text>
-
+      <Text> {`${res.counter}`}</Text>
       <StatusBar style="auto" />
     </View>
   );
