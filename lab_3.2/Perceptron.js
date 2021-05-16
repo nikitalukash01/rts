@@ -35,9 +35,13 @@ class Perceptron {
   }
 
   learn(points, deadline = 100) {
-    while (true) {
+    let stop = false;
+    setTimeout(() => {
+      stop = true;
+    }, deadline);
+    while (!stop) {
       if (deadline / points.length <= 0 || this.train(points)) break;
-      deadline--;
+      //deadline--;
     }
 
     return [

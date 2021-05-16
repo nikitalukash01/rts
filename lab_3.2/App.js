@@ -5,7 +5,7 @@ import Perceptron from "./Perceptron";
 
 export default function App() {
   const [learningRate, setLearningRate] = useState(0.001);
-  const [deadline, setDeadline] = useState(100);
+  const [deadline, setDeadline] = useState(1000);
   const [result, setResult] = useState();
   const [time, setTime] = useState();
 
@@ -28,36 +28,42 @@ export default function App() {
         onValueChange={(value) => setDeadline(value)}
         placeholder={{ label: "Оберіть дедлайн", value: null }}
         items={[
-          { label: "100", value: 100 },
-          { label: "200", value: 200 },
-          { label: "500", value: 500 },
+          { label: "1000", value: 1000 },
+          { label: "2000", value: 2000 },
+          { label: "3000", value: 3000 },
         ]}
       />
-      <Text style={styles.result}>{[result, time]}</Text>
-        <View style = {styles.btn}>
+      {<Text style={styles.result}>{[result, time]}</Text>}
+      <View style={styles.btn}>
         <Button
-          buttonStyle={{backgroundColor:"black"}}
+          buttonStyle={{ backgroundColor: "black" }}
           color="green"
           title="Learn"
           onPress={() => {
             const p = new Perceptron({ threshold: 4, learningRate });
             let start = performance.now();
-            setResult(
-              `${p.learn(
-                [
-                  [0, 6],
-                  [3, 3],
-                  [1, 5],
-                  [2, 4],
-                ],
-                deadline
-              )}`
+            const result = p.learn(
+              [
+                [0, 6],
+                [3, 3],
+                [1, 5],
+                [2, 4],
+              ],
+              deadline
             );
+
             let end = performance.now();
-            setTime(`\nTime= ${end - start}`);
+            const diff = end - start;
+            setTime(() => {
+              `\nTime= ${diff}`;
+            });
+
+            diff > deadline
+              ? alert("deadline exposed")
+              : setResult(`${result}`);
           }}
         />
-        </View>
+      </View>
     </SafeAreaView>
   );
 }
@@ -77,7 +83,7 @@ const styles = StyleSheet.create({
     height: 50,
     width: 150,
     backgroundColor: "green",
-    borderRadius:50,
+    borderRadius: 50,
   },
 });
 const pickerSelectStyles = StyleSheet.create({
