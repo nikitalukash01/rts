@@ -32,13 +32,14 @@ class Chromosome {
     }
 }
 
+let start = performance.now();
 class Genetic {
     population = []
     constructor(task, target) {
         const { length } = task
         this.population =
             Array.from(
-                { length },
+                { length: length + 1 },
                 () => new Chromosome({
                     genes: Array.from({ length }, () => random(1, target / 2)),
                     task: task,
@@ -75,5 +76,8 @@ class Genetic {
         this.population = children
     }
 }
+let end = performance.now()
+let res = start - end;
+console.log(res);
 
 export default Genetic;
